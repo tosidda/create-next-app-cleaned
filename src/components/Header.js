@@ -1,14 +1,14 @@
+import { useState } from 'react';
+import { CgSearch } from 'react-icons/cg';
+import { FiMenu } from 'react-icons/fi';
+import { IoClose } from "react-icons/io5";
 import styled from "styled-components";
-import {FiMenu} from 'react-icons/fi';
-import {CgSearch} from 'react-icons/cg';
-import {IoCLose} from 'react-icons/io5';
-import {Colors, Devices} from './Theme';
-import {useState} from 'react';
-import Button from './styled/Button';
-import SearchBar from "./Header/SearchBar";
 import MobileSearchBar from "./Header/MobileSearchBar";
+import SearchBar from "./Header/SearchBar";
+import Button from './styled/Button.styled';
+import { Colors, Devices } from './Theme';
 
-const HeaderEl = styled.article`
+const HeaderEl = styled.header`
     color: ${Colors.White};
     z-index: 10;
     display: flex;
@@ -83,32 +83,35 @@ const AuthItems = styled(NavItem)`
 `;
 
 export default function Header({mobileMenu}) {
-    const [SearchIsOpen, setSearchIsOpen] = useState(false);
     const { MoblieMenuIsOpen, setMobileMenuIsOpen } = mobileMenu;
+    const [SearchIsOpen, setSearchIsOpen] = useState(false);
 
     function toggleMenu() {
         setMobileMenuIsOpen(!MoblieMenuIsOpen);
+        console.log(MoblieMenuIsOpen);
     }
 
     return <HeaderEl>
         <MenuIcon>
-            {MoblieMenuIsOpen ? (
-                <IoCLose 
-                    onClick={() => {
-                        toggleMenu();
-                    }}
-                />
-            ) : (
-                <FiMenu
-                    onClick={() => {
-                        toggleMenu();
-                    }}
-                />
-            )}
+        { MoblieMenuIsOpen ? (
+          <IoClose
+            style={{ fontSize: "2.5rem" }}
+            color={Colors.Primary}
+            onClick={() => {
+              toggleMenu();
+            }}
+          />
+        ) : (
+          <FiMenu
+            onClick={() => {
+              toggleMenu();
+            }}
+          />
+        )}
         </MenuIcon>
         <Center>
             <Logo src="/images/ecotennis.png"/>
-            <LogoText href="#">ECO</LogoText>
+            <LogoText href="#">Renew Tennis</LogoText>
             <SearchBar/>
             <Nav>
                 <ul>
@@ -116,10 +119,10 @@ export default function Header({mobileMenu}) {
                         <NavItem href="#">Marketplace</NavItem>
                     </li>
                     <li>
-                        <NavItem href="#">Drops</NavItem>
+                        <NavItem href="#">List</NavItem>
                     </li>
                     <li>
-                        <NavItem href="#">Brands</NavItem>
+                        <NavItem href="#">Organizations</NavItem>
                     </li>
                     <li>
                         <Button>Create</Button>

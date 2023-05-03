@@ -1,7 +1,10 @@
-import styled, { createGlobalStyle } from "styled-components";
-import { Colors } from "../src/components/Theme";
 import { useState } from 'react';
+import styled, { createGlobalStyle } from "styled-components";
+import Footer from '../src/components/Footer';
 import Header from "../src/components/Header";
+import Button from "../src/components/styled/Button.styled";
+import Page from '../src/components/styled/Page.styled';
+import { Colors } from "../src/components/Theme";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -60,8 +63,36 @@ const Main = styled.div`
   width: 100%;
   min-height: 100vh;
 `;
-const MobileMenu = styled.div``;
-const NavItem = styled.a``;
+const MobileMenu = styled.div`
+  background-color: ${Colors.Background};
+  color: ${Colors.White};
+  z-index: ${(p)=> (p.open ? '9': '-1')};
+  position: absolute;
+  padding: 2rem 1rem 1rem 1.2rem;
+  left: 0;
+  display: flex;
+  width: ${(p) => (p.open ? '100%' : '0')};
+  height: 100%;
+
+  ul {
+    opacity: ${(p) => p.open ? '1': '0'};
+    transition: all 0.1s ease-out;
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+
+    li {
+      cursor: pointer;
+    }
+  }
+`;
+const NavItem = styled.a`
+  font-size: 1.2rem;
+  font-weight: 400;
+`;
 
 function MyApp({ Component, pageProps }) {
   const [MobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
@@ -70,9 +101,33 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyle />
       <Main>
         <Header mobileMenu={{MobileMenuIsOpen, setMobileMenuIsOpen}}/>
-        <Component {...pageProps} />
-        {/* page */}
-        {/* footer */}
+        <Page>
+          <MobileMenu open={MobileMenuIsOpen}>
+            <ul>
+              <li>
+                <NavItem>Marketplace</NavItem>
+              </li>
+              <li>
+                <NavItem href="#">Drops</NavItem>
+              </li>
+              <li>
+                <NavItem href="#">Brands</NavItem>
+              </li>
+              <li>
+                <Button>Create</Button>
+              </li>
+              <hr color={Colors.Primary} size="1"/>
+              <li>
+                <NavItem href="#">Sign In</NavItem>
+              </li>
+              <li>
+                <NavItem href="#">Sign Up</NavItem>
+              </li>
+            </ul>
+          </MobileMenu>
+          <Component {...pageProps} />
+        </Page>
+        <Footer/>
       </Main>
     </>
   );

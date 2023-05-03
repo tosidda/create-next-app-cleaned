@@ -44,7 +44,7 @@ const SearchInput = styled.input`
 
 const HideSearchBar = styled.span`
     color: ${Colors.White};
-
+    cursor: pointer;
 `;
 
 export default function MobileSearchBar({SearchIsOpen, setSearchIsOpen}) {
