@@ -75,7 +75,13 @@ export default function TopCollectibles() {
             </TopSection>
             <Grid>
                 {TennisCharities.map(products => {
-                    return <CharityCard item = {products} key={products.Id}/>
+                    return (
+                        <Link href="/asset" passHref>
+                            <a>
+                                <CharityCard item = {products} key={products.Id}/>
+                            </a>
+                        </Link>
+                    );
                 })}
             </Grid>
             <ShowMore>show more</ShowMore>

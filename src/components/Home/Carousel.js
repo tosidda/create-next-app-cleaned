@@ -159,7 +159,7 @@ export default function Carousel() {
         }}>
             {[1,2,3,4,5,6,7,8,9,10].map((i) => {
                 return (
-                <Link href="#" passHref key={i}>
+                <Link href="/profile" passHref key={i}>
                     <a>
                         <Item>
                             <Avatar>
